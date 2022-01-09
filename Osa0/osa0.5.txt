@@ -11,15 +11,3 @@ lähettää tiedostot selaimelle.
 
 note right of Selain:
 selain suorittaa spa.js koodia
-
-note right of Selain:
- Luodaan uusi muistiinpano, 
-tapahtumakäsittelijä tekee json muotoisen muistiinpanon, 
-ja puskee sen palvelimelle.
-
-Selain->Palvelin: 
-selain lähettää post pyynnön palvelimelle, new_note_spa.
-
-note right of Palvelin: palvelin vastaa 201 created. 
-
-Selain->Selain:piirtää uuden muistiinpanon ruudulle.
