@@ -1,0 +1,25 @@
+Title: SPA
+
+Selain->Palvelin: 
+pyytää palvelimelta tiedostoja.(spa, main.css, spa.js, data.json)
+
+note right of Palvelin:
+get, status code 200(status ok).
+
+Palvelin->Selain: 
+lähettää tiedostot selaimelle.
+
+note right of Selain:
+selain suorittaa spa.js koodia
+
+note right of Selain:
+ Luodaan uusi muistiinpano, 
+tapahtumakäsittelijä tekee json muotoisen muistiinpanon, 
+ja puskee sen palvelimelle.
+
+Selain->Palvelin: 
+selain lähettää post pyynnön palvelimelle, new_note_spa.
+
+note right of Palvelin: palvelin vastaa 201 created. 
+
+Selain->Selain:piirtää uuden muistiinpanon ruudulle.
