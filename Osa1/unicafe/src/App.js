@@ -1,55 +1,76 @@
 import React, { useState } from 'react';
 
+const Button = (props) => {
+  console.log(props)
+  const { handleClick, text } = props
+  return (
+      <button onClick={handleClick}>
+        {text}
+      </button>
+  )
+}
+
+const Statistics = (props) => { 
+  if(props.average.length === 0) {
+    return (
+      <div>
+        <p>no feedback given</p>
+      </div>
+    )
+    
+  }
+  return (
+    <div>{props.text} {props.value}</div>
+  )
+}
+
+
+
 const App = () => {
   
-  const[good, setGood] = useState(0)
-  const[netural, setNeutral] = useState(0)
-  const[bad, setBad] = useState(0)
+  const [good, setGood] = useState(0)
+  const [netural, setNeutral] = useState(0)
+  const [bad, setBad] = useState(0)
+  const [average, setAverage] = useState([])
+  const [sum, setSum] = useState(0)
+  const [all, setAll] = useState(0)
 
-  const increaseGood = () => setGood(good +1)
-  const increaseNeutral = () => setNeutral(netural +1)
-  const increaseBad = () => setBad(bad +1)
-
-  const Button = (props) => {
-    return (
-        <button onClick={props.handleClick}>
-          {props.text}
-        </button>
-    )
+  const handleGoodtClick = () => {
+    setAverage(average.concat(+1))
+    setGood(good +1)
+    setSum(sum +1)
+    setAll(all +1)
   }
 
-  const Display = (props) => {
-    const average = ({handleClick}) => {
-        var values = []
-      if (handleClick === increaseGood) {
-        values.push(1)
-      }
-      else if (handleClick === increaseNeutral) {
-        values.push(0)
-      } else {
-        values.push(-1)
-      }
-    }
-    return (
-      <div>{props.text} {props.value}</div>
-    )
+
+  const handleNeutralClick = () => {
+    setAverage(average.concat(0))
+    setNeutral(netural +1)
+    setSum(sum +0)
+    setAll(all +1)
   }
 
+  const handleBadClick = () => {
+    setAverage(average.concat(-1))
+    setBad(bad +1)
+    setSum(sum -1)
+    setAll(all +1)
+  }
 
 
   return (
     <div>
       <h1>Give feedback</h1>
-      <Button handleClick={increaseGood} text='good' />
-      <Button handleClick={increaseNeutral} text='neutral' />
-      <Button handleClick={increaseBad} text='bad' />
-        <h1>Statistics</h1>
-      <Display text='good' value={good} />
-      <Display text='neutral' value={netural} />
-      <Display text='bad' value={bad} />
-      <Display text='all' value={bad + good + netural} />
-      <Display text='average' value={bad} />
-      <Display text='positive' value={good} />
+      <Button handleClick={handleGoodtClick} text='good' />
+      <Button handleClick={handleNeutralClick} text='neutral' />
+      <Button handleClick={handleBadClick} text='bad' />
+      <h1>Statistics</h1>
+      <Statistics average={average} text='good' value={good} />
+      <Statistics average={average} text='neutral' value={netural} />
+      <Statistics average={average} text='bad' value={bad} />
+      <Statistics average={average} text='all' value={all} />
+      <Statistics average={average} text='average' value={sum/average.length} />
+      <Statistics average={average} text='positive' value={good/{all}*100} />
       
 
     </div>

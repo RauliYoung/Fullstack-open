@@ -8,13 +8,13 @@ const Header = (props) => {
   )
 }
 
-const Content = ({ parts, excercises}) => {
+const Content = (props) => {
+  console.log(props);
   return (
     <div>
-        <Part part={parts[0]} excercises={excercises[0]}/>
-        <Part part={parts[1]} excercises={excercises[1]}/>
-        <Part part={parts[2]} excercises={excercises[2]}/>
-
+      <Part part={props.part[0].name} excercises={props.part[0].excercises1}/>
+      <Part part={props.part[1].name} excercises={props.part[1].excercises2}/>
+      <Part part={props.part[2].name} excercises={props.part[2].excercises3}/>
     </div>
   )
 }
@@ -22,12 +22,13 @@ const Content = ({ parts, excercises}) => {
 const Total = (props) => {
   return (
     <div>
-      <p>Number of excercises {props.excercises}</p>
+      <p>Number of excercises {props.part[0].excercises1 + props.part[1].excercises2 + props.part[2].excercises3}</p>
     </div>
   )
 }
 
 const Part = (props) => {
+  //console.log(props);
   return (
     <div>
       <p>{props.part} {props.excercises}</p>
@@ -38,20 +39,33 @@ const Part = (props) => {
 
 
 const App = () => {
-  const course = 'Half stack application development';
-  const part1 = 'Fundamentals of React';
-  const excercises1 = 10;
-  const part2 = 'Using props to passa data';
-  const excercises2 = 7;
-  const part3 = 'State of a component';
-  const excercises3 = 14;
+  const course = {
+    name: 'Half stack application development',
+
+    parts: [
+    {
+      name: 'Fundamentals of React',
+      excercises1: 10,
+    },
+    {
+      name: 'Using props to passa data',
+      excercises2: 7,
+    },
+    {
+      name:'State of a component',
+      excercises3: 14,
+    }
 
 
+  ]
+  }
   return (
     <div>
-      <Header course={course} />
-      <Content parts={[part1, part2,part3]} excercises={[excercises1, excercises2, excercises3]}/>
-      <Total excercises={excercises1 + excercises2 + excercises3} />
+      <Header course={course.name} />
+      <Content part={course.parts}/>
+      <Total part={course.parts}/>
+      
+
     </div>
   )
  }
