@@ -26,17 +26,8 @@ const App = () => {
     setVotes(copy);
   };
 
-  const mostVotes = () => {
-    Math.max.apply(
-      Math,
-      votes.map(function (o) {
-        return o.y;
-      })
-    );
-  };
-
   console.log(votes);
-  console.log(mostVotes);
+
   return (
     <div>
       <h1>Anecdote of the day</h1>
@@ -52,8 +43,8 @@ const App = () => {
         />
       </div>
       <h1>Anecdote with the most votes</h1>
-      {anecdotes[{ mostVotes }]}
-      has {mostVotes} votes
+      {anecdotes[votes.indexOf(Math.max(...votes))]}
+      <div>has {Math.max(...votes)} votes</div>
     </div>
   );
 };
