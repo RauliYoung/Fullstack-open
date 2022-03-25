@@ -19,6 +19,7 @@ const App = () => {
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
   const [newFilter, setNewFilter] = useState("");
+  const [filtered, setFiltered] = useState([]);
 
   const handleNewName = (event) => {
     console.log(event.target.value);
@@ -31,15 +32,15 @@ const App = () => {
   };
 
   const handleFilter = (event) => {
-    console.log(event.target.value);
     event.preventDefault();
     setNewFilter(event.target.value);
+    onkoNimi(event);
+
     return (
       <div>
         <Filter persons={handleFilter} />
       </div>
     );
-    persons.filter((p) => p.name);
   };
 
   const addPerson = (event) => {
@@ -53,7 +54,20 @@ const App = () => {
       : alert(`${newName} is already added in the phonebook`);
     setNewName("");
     setNewNumber("");
-    console.log(person);
+  };
+
+  const onkoNimi = (event) => {
+    let nimi = event.target.value;
+    if (nimi.length > 0) {
+      const tulosta = persons.filter((p) =>
+        p.name.toLowerCase().includes(nimi.toLowerCase())
+      );
+      if (tulosta.length > 0) {
+        setFiltered(tulosta);
+      }
+    } else {
+      setFiltered([]);
+    }
   };
 
   return (
@@ -75,7 +89,7 @@ const App = () => {
         </div>
       </form>
       <h2>Numbers</h2>
-      <Filter persons={persons} />
+      <Filter persons={filtered} />
     </div>
   );
 };
