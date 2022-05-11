@@ -1,11 +1,9 @@
-const Filter = ({ persons }) => (
-  <div>
-    {persons.map((a) => (
-      <p key={a.name}>
-        {a.name} {a.number}
-      </p>
-    ))}
-  </div>
-);
+const Filter = ({ newFilter, handleFilter }) => {
+  return (
+    <div>
+      filter shown with <input value={newFilter} onChange={handleFilter} />
+    </div>
+  );
+};
 
 export default Filter;
