@@ -1,7 +1,7 @@
 import React from "react";
 
 const PhoneBook = ({ persons, filter, shown }) => {
-  console.log(shown);
+  console.log("rendered", shown);
   if (shown) {
     return (
       <div>

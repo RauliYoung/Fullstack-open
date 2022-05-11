@@ -1,28 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import Filter from "./Components/Filter";
 import PhoneBook from "./Components/PhoneBook";
 import AddPerson from "./Components/AddPerson";
+import axios from "axios";
 
 const App = () => {
-  const [persons, setPersons] = useState([
-    {
-      name: "Janne Ahonen",
-      number: "0400 12341234",
-    },
-    {
-      name: "Kalle Kiviaho",
-      number: "050 12340988",
-    },
-    {
-      name: "Mari Kiviniemi",
-      number: "02 3233 2320",
-    },
-    {
-      name: "Jooseppi Kekomaa",
-      number: "02 4444 2122",
-    },
-  ]);
+  const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
   const [shown, setShown] = useState(true);
@@ -66,6 +50,12 @@ const App = () => {
       setShown(true);
     }
   };
+
+  useEffect(() => {
+    axios.get("http://localhost:3001/persons").then((res) => {
+      setPersons(res.data);
+    });
+  }, [setPersons]);
 
   return (
     <div>
