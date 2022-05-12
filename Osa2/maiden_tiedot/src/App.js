@@ -7,6 +7,7 @@ const FilterNames = (props) => {
   const shown = props.shown;
   const names = props.countries;
   const filtered = props.filtered;
+  console.log(filtered);
   if (shown) {
     return (
       <div>
@@ -16,6 +17,13 @@ const FilterNames = (props) => {
       </div>
     );
   } else {
+    if (filtered.length >= 10) {
+      return (
+        <div>
+          <p>Too many matches, give a more specific name!</p>
+        </div>
+      );
+    }
     return (
       <div>
         {filtered.map((c) => (
@@ -34,7 +42,6 @@ const App = () => {
   const onChangeHandler = (event) => {
     nameIsInList(event);
     event.preventDefault();
-    setFilter(event.target.value);
   };
   const nameIsInList = (event) => {
     setShown(false);
